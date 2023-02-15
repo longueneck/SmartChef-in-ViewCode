@@ -11,22 +11,29 @@ import Foundation
     
 class ViewController: UIViewController {
     
+    var mainView: UIView = {
+        let main = UIView()
+        
+        main.translatesAutoresizingMaskIntoConstraints = false
+        main.backgroundColor = .white
+            return main
+        }()
+    
     var bgYellow: UIView = {
         let background = UIView()
+        
         background.translatesAutoresizingMaskIntoConstraints = false
         background.backgroundColor = UIColor(red: 255/255, green: 177/255, blue: 0/255, alpha: 1)
-        
-      return background
-    }()
+            return background
+        }()
     
     var imageBall: UIImageView = {
         let balls = UIImageView()
-        balls.image = UIImage(named: "bolas.png")
-            
-        balls.translatesAutoresizingMaskIntoConstraints = false
         
-        return balls
-    }()
+        balls.image = UIImage(named: "bolas.png")
+        balls.translatesAutoresizingMaskIntoConstraints = false
+            return balls
+        }()
     
     var logoInitial: UIImageView = {
        let logoImage = UIImageView()
@@ -34,10 +41,8 @@ class ViewController: UIViewController {
         logoImage.translatesAutoresizingMaskIntoConstraints = false
         logoImage.image = UIImage(named: "logomainlogin.png")
         logoImage.contentMode = .scaleAspectFit
-        
-        
-    return logoImage
-    }()
+            return logoImage
+        }()
     
     var labelLogin: UILabel = {
        let loginText = UILabel()
@@ -46,9 +51,8 @@ class ViewController: UIViewController {
         loginText.text = "Usuário"
         loginText.font = UIFont.boldSystemFont(ofSize: 17)
         loginText.textColor = UIColor(red: 69/255, green: 47/255, blue: 20/255, alpha: 1)
-        
-    return loginText
-    }()
+            return loginText
+        }()
     
     
     var tfLogin: UITextField = {
@@ -56,17 +60,21 @@ class ViewController: UIViewController {
         
         login.translatesAutoresizingMaskIntoConstraints = false
         login.layer.cornerRadius = 10
+        login.textColor = UIColor.black
         login.backgroundColor = .white
         login.layer.borderWidth = 3
         login.layer.borderColor = UIColor(red: 255/255, green: 177/255, blue: 0/255, alpha: 1).cgColor
         login.layer.shadowColor = UIColor.black.cgColor
-        login.layer.shadowOpacity = 0.2
+        login.layer.shadowOpacity = 0.1
         login.layer.shadowOffset = CGSize(width: 0, height: 2)
         login.layer.shadowRadius = 2
-        
-        
-    return login
-    }()
+        login.keyboardType = .emailAddress
+        login.autocapitalizationType = .none
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: login.frame.height))
+            login.leftView = paddingView
+            login.leftViewMode = .always
+            return login
+        }()
     
     var labelPassword: UILabel = {
        let password = UILabel()
@@ -75,26 +83,29 @@ class ViewController: UIViewController {
         password.text = "Senha"
         password.font = UIFont.boldSystemFont(ofSize: 17)
         password.textColor = UIColor(red: 69/255, green: 47/255, blue: 20/255, alpha: 1)
-        
-    return password
-    }()
-    
+            return password
+        }()
     
     var tfPassword: UITextField = {
+        
        let pass = UITextField()
         
         pass.translatesAutoresizingMaskIntoConstraints = false
         pass.layer.cornerRadius = 10
         pass.backgroundColor = .white
+        pass.textColor = UIColor.black
         pass.layer.borderWidth = 3
         pass.layer.borderColor = UIColor(red: 255/255, green: 177/255, blue: 0/255, alpha: 1).cgColor
         pass.layer.shadowColor = UIColor.black.cgColor
-        pass.layer.shadowOpacity = 0.2
+        pass.layer.shadowOpacity = 0.1
         pass.layer.shadowOffset = CGSize(width: 0, height: 2)
         pass.layer.shadowRadius = 2
-        
-    return pass
-    }()
+        pass.isSecureTextEntry = true
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: pass.frame.height))
+            pass.leftView = paddingView
+            pass.leftViewMode = .always
+            return pass
+        }()
     
     var passReset: UILabel = {
        let reset = UILabel()
@@ -103,9 +114,8 @@ class ViewController: UIViewController {
         reset.text = "Recupere sua senha"
         reset.font = UIFont.boldSystemFont(ofSize: 12)
         reset.textColor = UIColor(red: 69/255, green: 47/255, blue: 20/255, alpha: 1)
-        
-    return reset
-    }()
+            return reset
+        }()
 
     var button1: UIButton = {
        let button = UIButton()
@@ -116,14 +126,12 @@ class ViewController: UIViewController {
         button.backgroundColor = UIColor(red: 255/255, green: 177/255, blue: 0/255, alpha: 1)
         button.layer.cornerRadius = 10
         button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.2
+        button.layer.shadowOpacity = 0.1
         button.layer.shadowOffset = CGSize(width: 0, height: 2)
         button.layer.shadowRadius = 2
-        
-    return button
-    }()
-    
-    
+            return button
+        }()
+
     var txtConectse: UILabel = {
        let reset = UILabel()
         
@@ -131,25 +139,83 @@ class ViewController: UIViewController {
         reset.text = "Ou conecte-se com"
         reset.font = UIFont.boldSystemFont(ofSize: 12)
         reset.textColor = UIColor(red: 69/255, green: 47/255, blue: 20/255, alpha: 1)
-        
-    return reset
+            return reset
     }()
     
     var viewSeparation: UIView = {
         let background = UIView()
+        
         background.translatesAutoresizingMaskIntoConstraints = false
         background.backgroundColor = UIColor(red: 255/255, green: 177/255, blue: 0/255, alpha: 1)
         background.layer.cornerRadius = 5
+            return background
+        }()
+
+    var appleIcon: UIButton = {
+       let apple = UIButton()
         
-      return background
-    }()
+        apple.translatesAutoresizingMaskIntoConstraints = false
+        apple.setTitleColor(UIColor(red: 69/255, green: 47/255, blue: 20/255, alpha: 1), for: .normal)
+        apple.backgroundColor = UIColor(red: 255/255, green: 177/255, blue: 0/255, alpha: 1)
+        apple.layer.cornerRadius = 10
+        apple.layer.shadowColor = UIColor.black.cgColor
+        apple.layer.shadowOpacity = 0.1
+        apple.layer.shadowOffset = CGSize(width: 0, height: 2)
+        apple.layer.shadowRadius = 2
+        apple.setImage(UIImage(named: "appleicon.png"), for: .normal)
+            return apple
+        }()
     
+    var btGoogleIcon: UIButton = {
+       let google = UIButton()
+        
+        google.translatesAutoresizingMaskIntoConstraints = false
+        google.setTitleColor(UIColor(red: 69/255, green: 47/255, blue: 20/255, alpha: 1), for: .normal)
+        google.backgroundColor = UIColor(red: 255/255, green: 177/255, blue: 0/255, alpha: 1)
+        google.layer.cornerRadius = 10
+        google.layer.shadowColor = UIColor.black.cgColor
+        google.layer.shadowOpacity = 0.1
+        google.layer.shadowOffset = CGSize(width: 0, height: 2)
+        google.layer.shadowRadius = 2
+        google.setImage(UIImage(named: "googleicon.png"), for: .normal)
+            return google
+        }()
     
+    var btFaceIcon: UIButton = {
+       let facebook = UIButton()
+        
+        facebook.translatesAutoresizingMaskIntoConstraints = false
+        facebook.setTitleColor(UIColor(red: 69/255, green: 47/255, blue: 20/255, alpha: 1), for: .normal)
+        facebook.backgroundColor = UIColor(red: 255/255, green: 177/255, blue: 0/255, alpha: 1)
+        facebook.layer.cornerRadius = 10
+        facebook.layer.shadowColor = UIColor.black.cgColor
+        facebook.layer.shadowOpacity = 0.1
+        facebook.layer.shadowOffset = CGSize(width: 0, height: 2)
+        facebook.layer.shadowRadius = 2
+        facebook.setImage(UIImage(named: "faceicon.png"), for: .normal)
+            return facebook
+        }()
+    
+    var buttonSignIn: UIButton = {
+       let entrar = UIButton()
+        
+        entrar.translatesAutoresizingMaskIntoConstraints = false
+        entrar.setTitle("Inscreva-se", for: .normal)
+        entrar.setTitleColor(UIColor(red: 69/255, green: 47/255, blue: 20/255, alpha: 1), for: .normal)
+        entrar.backgroundColor = .white
+        entrar.layer.borderWidth = 3
+        entrar.layer.borderColor = UIColor(red: 255/255, green: 177/255, blue: 0/255, alpha: 1).cgColor
+        entrar.layer.cornerRadius = 10
+        entrar.layer.shadowColor = UIColor.black.cgColor
+        entrar.layer.shadowOpacity = 0.1
+        entrar.layer.shadowOffset = CGSize(width: 0, height: 2)
+        entrar.layer.shadowRadius = 2
+            return entrar
+        }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //view.backgroundColor = UIColor(red: 255/255, green: 177/255, blue: 0/255, alpha: 1)
-        //Carregadora da tela - Tudo que e criado tem que estar aqui pra ser mostrado!
         
         addSubs()
         addConstraints()
@@ -157,30 +223,35 @@ class ViewController: UIViewController {
         
     }
     
-    func addSubs(){ //Funcao adiciona todas as telas dentro da ViewDidLoad
+    
+    func addSubs(){
+        self.view.addSubview(mainView)
         self.view?.addSubview(bgYellow)
         self.view.addSubview(imageBall)
         self.view.addSubview(logoInitial)
-        //COnjunto 1
         self.view.addSubview(labelLogin)
         self.view.addSubview(tfLogin)
-        //Conjunto 2
         self.view.addSubview(labelPassword)
         self.view.addSubview(tfPassword)
-        
         self.view.addSubview(passReset)
-        
         self.view.addSubview(button1)
         self.view.addSubview(txtConectse)
         self.view.addSubview(viewSeparation)
+        self.view.addSubview(appleIcon)
+        self.view.addSubview(btFaceIcon)
+        self.view.addSubview(btGoogleIcon)
+        self.view.addSubview(buttonSignIn)
     }
     
     func addConstraints(){
         
-        NSLayoutConstraint.activate([//Funcao adiciona todas as telas dentro da ViewDidLoad
+        NSLayoutConstraint.activate([
             
-        //View Segundaria -> Cor Amarelo
-        //MARK
+        mainView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
+        mainView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+        mainView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+        mainView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),
+
         bgYellow.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
         bgYellow.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
         bgYellow.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
@@ -188,31 +259,22 @@ class ViewController: UIViewController {
         
         imageBall.centerYAnchor.constraint(equalTo: bgYellow.bottomAnchor, constant: 0),
         
-        //Logomarca do app
-        //MARK
         logoInitial.topAnchor.constraint(equalTo: bgYellow.topAnchor, constant: 80),
         logoInitial.heightAnchor.constraint(equalToConstant: 120),
         logoInitial.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40),
         logoInitial.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40),
-        //Adicionando constraints para a Texto de Login
-        
-        //MARK
-        //MARK - GRUPO 1
-        //Adicionando constraints para a o texto de login
+    
         labelLogin.topAnchor.constraint(equalTo: bgYellow.bottomAnchor, constant: 50),
         labelLogin.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 25),
-        //Adicionando constraints para a o textField de login
+       
         tfLogin.topAnchor.constraint(equalTo: labelLogin.bottomAnchor,constant: 10),
         tfLogin.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 25),
         tfLogin.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -25),
         tfLogin.heightAnchor.constraint(equalToConstant: 45),
-        
-        //MARK
-        //MARK GRUPO 2
-        //Adicionando constraints para a o texto da senha
+ 
         labelPassword.topAnchor.constraint(equalTo: tfLogin.bottomAnchor, constant: 20),
         labelPassword.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 25),
-        //Adicionando constraints para a o textField de senha
+      
         tfPassword.topAnchor.constraint(equalTo: labelPassword.bottomAnchor,constant: 10),
         tfPassword.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 25),
         tfPassword.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -25),
@@ -235,9 +297,28 @@ class ViewController: UIViewController {
         viewSeparation.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -25),
         viewSeparation.heightAnchor.constraint(equalToConstant: 10),
         
+        appleIcon.centerXAnchor.constraint(equalTo: viewSeparation.centerXAnchor),
+        appleIcon.topAnchor.constraint(equalTo: viewSeparation.bottomAnchor, constant: 16),
+        appleIcon.heightAnchor.constraint(equalToConstant: 64),
+        appleIcon.widthAnchor.constraint(equalToConstant: 64),
         
-        
+        btFaceIcon.leadingAnchor.constraint(equalTo: viewSeparation.leadingAnchor),
+        btFaceIcon.topAnchor.constraint(equalTo: viewSeparation.bottomAnchor, constant: 16),
+        btFaceIcon.heightAnchor.constraint(equalToConstant: 64),
+        btFaceIcon.widthAnchor.constraint(equalToConstant: 64),
+     
+        btGoogleIcon.trailingAnchor.constraint(equalTo: viewSeparation.trailingAnchor),
+        btGoogleIcon.topAnchor.constraint(equalTo: viewSeparation.bottomAnchor, constant: 16),
+        btGoogleIcon.heightAnchor.constraint(equalToConstant: 64),
+        btGoogleIcon.widthAnchor.constraint(equalToConstant: 64),
+                                   
+        buttonSignIn.topAnchor.constraint(equalTo: appleIcon.bottomAnchor,constant: 20),
+        buttonSignIn.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 25),
+        buttonSignIn.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -25),
+        buttonSignIn.heightAnchor.constraint(equalToConstant: 45),
+
         ])
+        
     }
     
     
