@@ -210,9 +210,16 @@ class ViewController: UIViewController {
         entrar.layer.shadowOpacity = 0.1
         entrar.layer.shadowOffset = CGSize(width: 0, height: 2)
         entrar.layer.shadowRadius = 2
+        entrar.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        
             return entrar
         }()
-
+    
+    @objc func buttonTapped() {
+        print("Botão foi pressionado!")
+        let signInVC = SignInViewController()
+        self.navigationController?.pushViewController(signInVC, animated: false)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -220,11 +227,17 @@ class ViewController: UIViewController {
         addSubs()
         addConstraints()
         
-        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        [tfLogin, tfPassword].forEach {
+            $0?.resignFirstResponder()
+        }
     }
     
     
     func addSubs(){
+        //Elements
         self.view.addSubview(mainView)
         self.view?.addSubview(bgYellow)
         self.view.addSubview(imageBall)
@@ -241,7 +254,18 @@ class ViewController: UIViewController {
         self.view.addSubview(btFaceIcon)
         self.view.addSubview(btGoogleIcon)
         self.view.addSubview(buttonSignIn)
+        
+        //Delegates
+        tfLogin.delegate = self
+        tfPassword.delegate = self
+        
     }
+    
+//    func setDelegateTextFields(){
+//        tfLogin.delegate = self
+//        tfPassword.delegate = self
+//    }
+    
     
     func addConstraints(){
         
@@ -317,9 +341,34 @@ class ViewController: UIViewController {
         buttonSignIn.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -25),
         buttonSignIn.heightAnchor.constraint(equalToConstant: 45),
 
+      
         ])
+    }
+    
+  
+}
+
+extension ViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print(#function)
+        textField.layer.borderWidth = 3
+        textField.layer.borderColor = UIColor(red: 48/255, green: 68/255, blue: 20/255, alpha: 1).cgColor
         
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print(#function)
+        textField.layer.borderWidth = 3
+        textField.layer.borderColor = UIColor(red: 255/255, green: 177/255, blue: 0/255, alpha: 1).cgColor
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        print(#function)
+        return true
+    }
+    
+   
     
 }
